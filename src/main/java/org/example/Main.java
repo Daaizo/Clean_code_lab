@@ -13,6 +13,10 @@ import org.example.lab2.command.Command;
 import org.example.lab2.command.Light;
 import org.example.lab2.command.LightOnCommand;
 import org.example.lab2.command.RemoteControl;
+import org.example.lab1.adapter.Bicycle;
+import org.example.lab1.adapter.Bike;
+import org.example.lab1.adapter.Skateboard;
+import org.example.lab1.adapter.SkateboardAdapter;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,6 +28,7 @@ public class Main {
 
         // lab2
         demonstrateCommand();
+        demonstrateAdapter();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -75,6 +80,28 @@ public class Main {
         System.out.println(email);
 
         System.out.println();
+    }
+
+    private static void demonstrateAdapter() {
+        System.out.println("--- Adapter Pattern (Skateboard & Bicycle) ---");
+
+        Bike bike = new Bicycle("City Bike");
+        bike.accelerate();
+        bike.ringBell();
+        bike.brake();
+
+        System.out.println();
+
+        Skateboard board = new Skateboard("Street Deck");
+        Bike boardAsBike = new SkateboardAdapter(board);
+
+        boardAsBike.accelerate();
+        boardAsBike.ringBell();
+        boardAsBike.brake();
+
+        if (boardAsBike instanceof SkateboardAdapter s) {
+            s.doOllie();
+        }
     }
 
     private static void demonstrateCommand() {
