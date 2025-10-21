@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
         demonstrateFactoryMethod();
         demonstrateSingleton();
+        demonstrateDecorator();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -34,6 +35,21 @@ public class Main {
         DatabaseConnection db2 = DatabaseConnection.getInstance();
         System.out.println("db1 = " + db1);
         System.out.println("db2 = " + db2);
+
+        System.out.println();
+    }
+
+    private static void demonstrateDecorator() {
+        System.out.println("--- Decorator Pattern ---");
+
+        Coffee coffee = new SimpleCoffee();
+        System.out.println(coffee.getDescription() + " - " + coffee.getCost() + " PLN");
+
+        coffee = new MilkDecorator(coffee);
+        System.out.println(coffee.getDescription() + " - " + coffee.getCost() + " PLN");
+
+        coffee = new SugarDecorator(coffee);
+        System.out.println(coffee.getDescription() + " - " + coffee.getCost() + " PLN");
 
         System.out.println();
     }
