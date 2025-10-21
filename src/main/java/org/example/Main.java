@@ -9,6 +9,8 @@ import org.example.lab1.factory.CarFactory;
 import org.example.lab1.factory.MotorcycleFactory;
 import org.example.lab1.factory.VehicleFactory;
 import org.example.lab1.singleton.DatabaseConnection;
+import org.example.lab2.State.Order;
+import org.example.lab2.State.PendingState;
 import org.example.lab2.command.Command;
 import org.example.lab2.command.Light;
 import org.example.lab2.command.LightOnCommand;
@@ -37,6 +39,7 @@ public class Main {
         demonstrateCommand();
         demonstrateObserver();
         demonstrateStrategy();
+        demonstrateState();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -149,6 +152,7 @@ public class Main {
 
     private static void demonstrateStrategy() {
         System.out.println("--- Strategy Pattern ---");
+
         int[] array = {5, 2, 8, 1, 9};
         SortContext context = new SortContext();
 
@@ -157,6 +161,26 @@ public class Main {
 
         context.setStrategy(new QuickSort());
         context.executeStrategy(array.clone());
+
+        System.out.println();
+    }
+    private static void demonstrateState() {
+        System.out.println("--- State Pattern ---");
+
+        Order order = new Order("orderId");
+        order.setState(new PendingState());
+
+        order.getCurrentState();
+        order.process();
+
+        order.getCurrentState();
+        order.process();
+
+        order.getCurrentState();
+        order.process();
+
+        order.cancel();
+        order.getCurrentState();
 
         System.out.println();
     }
