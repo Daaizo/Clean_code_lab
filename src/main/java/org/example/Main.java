@@ -9,13 +9,18 @@ import org.example.lab1.factory.CarFactory;
 import org.example.lab1.factory.MotorcycleFactory;
 import org.example.lab1.factory.VehicleFactory;
 import org.example.lab1.singleton.DatabaseConnection;
+import org.example.lab2.adapter.Bicycle;
+import org.example.lab2.adapter.Bike;
+import org.example.lab2.adapter.Skateboard;
+import org.example.lab2.adapter.SkateboardAdapter;
 
 public class Main {
     public static void main(String[] args) {
-        demonstrateFactoryMethod();
-        demonstrateSingleton();
-        demonstrateDecorator();
-        demonstrateBuilder();
+//        demonstrateFactoryMethod();
+//        demonstrateSingleton();
+//        demonstrateDecorator();
+//        demonstrateBuilder();
+        demonstrateAdapter();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -67,5 +72,27 @@ public class Main {
         System.out.println(email);
 
         System.out.println();
+    }
+
+    private static void demonstrateAdapter() {
+        System.out.println("--- Adapter Pattern (Skateboard & Bicycle) ---");
+
+        Bike bike = new Bicycle("City Bike");
+        bike.accelerate();
+        bike.ringBell();
+        bike.brake();
+
+        System.out.println();
+
+        Skateboard board = new Skateboard("Street Deck");
+        Bike boardAsBike = new SkateboardAdapter(board);
+
+        boardAsBike.accelerate();
+        boardAsBike.ringBell();
+        boardAsBike.brake();
+
+        if (boardAsBike instanceof SkateboardAdapter s) {
+            s.doOllie();
+        }
     }
 }
