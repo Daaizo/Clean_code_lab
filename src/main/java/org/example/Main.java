@@ -9,13 +9,21 @@ import org.example.lab1.factory.CarFactory;
 import org.example.lab1.factory.MotorcycleFactory;
 import org.example.lab1.factory.VehicleFactory;
 import org.example.lab1.singleton.DatabaseConnection;
+import org.example.lab2.command.Command;
+import org.example.lab2.command.Light;
+import org.example.lab2.command.LightOnCommand;
+import org.example.lab2.command.RemoteControl;
 
 public class Main {
     public static void main(String[] args) {
+        // lab1
         demonstrateFactoryMethod();
         demonstrateSingleton();
         demonstrateDecorator();
         demonstrateBuilder();
+
+        // lab2
+        demonstrateCommand();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -68,4 +76,21 @@ public class Main {
 
         System.out.println();
     }
+
+    private static void demonstrateCommand() {
+        System.out.println("--- Command Pattern ---");
+
+        Light light = new Light("Living Room");
+        Command lightOn = new LightOnCommand(light);
+
+        RemoteControl remote = new RemoteControl();
+        remote.setCommand(lightOn);
+
+        remote.pressButton();
+        remote.pressUndo();
+        remote.pressButton();
+
+        System.out.println();
+    }
+
 }
