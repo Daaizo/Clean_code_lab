@@ -17,6 +17,9 @@ import org.example.lab1.adapter.Bicycle;
 import org.example.lab1.adapter.Bike;
 import org.example.lab1.adapter.Skateboard;
 import org.example.lab1.adapter.SkateboardAdapter;
+import org.example.lab2.observer.PhoneDisplay;
+import org.example.lab2.observer.WeatherStation;
+import org.example.lab2.observer.WindowsDisplay;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,10 +28,11 @@ public class Main {
         demonstrateSingleton();
         demonstrateDecorator();
         demonstrateBuilder();
+        demonstrateAdapter();
 
         // lab2
         demonstrateCommand();
-        demonstrateAdapter();
+        demonstrateObserver();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -116,6 +120,24 @@ public class Main {
         remote.pressButton();
         remote.pressUndo();
         remote.pressButton();
+
+        System.out.println();
+    }
+
+    private static void demonstrateObserver() {
+        System.out.println("--- Observer Pattern ---");
+
+        WeatherStation station = new WeatherStation();
+        PhoneDisplay phone = new PhoneDisplay();
+        WindowsDisplay windowsDisplay = new WindowsDisplay();
+
+        station.registerObserver(phone);
+        station.registerObserver(windowsDisplay);
+
+        station.setMeasurements(25.0f, 60.0f, 1013.0f);
+
+        station.removeObserver(phone);
+        station.setMeasurements(27.0f, 61.0f, 1015.0f);
 
         System.out.println();
     }
