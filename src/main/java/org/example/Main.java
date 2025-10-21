@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.lab1.builder.Email;
 import org.example.lab1.decorator.Coffee;
 import org.example.lab1.decorator.MilkDecorator;
 import org.example.lab1.decorator.SimpleCoffee;
@@ -14,6 +15,7 @@ public class Main {
         demonstrateFactoryMethod();
         demonstrateSingleton();
         demonstrateDecorator();
+        demonstrateBuilder();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -50,6 +52,19 @@ public class Main {
 
         coffee = new SugarDecorator(coffee);
         System.out.println(coffee.getDescription() + " - " + coffee.getCost() + " PLN");
+
+        System.out.println();
+    }
+
+    private static void demonstrateBuilder() {
+        System.out.println("--- Builder Pattern ---");
+
+        Email email = new Email.EmailBuilder("jan@example.com", "adam@example.com")
+                .subject("Ważna wiadomość")
+                .body("Treść emaila")
+                .priority(1)
+                .build();
+        System.out.println(email);
 
         System.out.println();
     }
