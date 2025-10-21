@@ -9,10 +9,10 @@ import org.example.lab1.factory.CarFactory;
 import org.example.lab1.factory.MotorcycleFactory;
 import org.example.lab1.factory.VehicleFactory;
 import org.example.lab1.singleton.DatabaseConnection;
-import org.example.lab2.adapter.Bicycle;
-import org.example.lab2.adapter.Bike;
-import org.example.lab2.adapter.Skateboard;
-import org.example.lab2.adapter.SkateboardAdapter;
+import org.example.lab1.adapter.Bicycle;
+import org.example.lab1.adapter.Bike;
+import org.example.lab1.adapter.Skateboard;
+import org.example.lab1.adapter.SkateboardAdapter;
 
 public class Main {
     public static void main(String[] args) {

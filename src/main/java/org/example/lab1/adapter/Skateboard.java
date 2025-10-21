@@ -1,4 +1,4 @@
-package org.example.lab2.adapter;
+package org.example.lab1.adapter;
 
 public class Skateboard {
     private final String model;

@@ -1,4 +1,4 @@
-package org.example.lab2.adapter;
+package org.example.lab1.adapter;
 
 public class Bicycle implements Bike {
     private final String model;
