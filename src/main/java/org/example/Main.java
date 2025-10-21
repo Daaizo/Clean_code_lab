@@ -20,6 +20,9 @@ import org.example.lab1.adapter.SkateboardAdapter;
 import org.example.lab2.observer.PhoneDisplay;
 import org.example.lab2.observer.WeatherStation;
 import org.example.lab2.observer.WindowsDisplay;
+import org.example.lab2.strategy.BubbleSort;
+import org.example.lab2.strategy.QuickSort;
+import org.example.lab2.strategy.SortContext;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,6 +36,7 @@ public class Main {
         // lab2
         demonstrateCommand();
         demonstrateObserver();
+        demonstrateStrategy();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -142,4 +146,18 @@ public class Main {
         System.out.println();
     }
 
+
+    private static void demonstrateStrategy() {
+        System.out.println("--- Strategy Pattern ---");
+        int[] array = {5, 2, 8, 1, 9};
+        SortContext context = new SortContext();
+
+        context.setStrategy(new BubbleSort());
+        context.executeStrategy(array.clone());
+
+        context.setStrategy(new QuickSort());
+        context.executeStrategy(array.clone());
+
+        System.out.println();
+    }
 }
