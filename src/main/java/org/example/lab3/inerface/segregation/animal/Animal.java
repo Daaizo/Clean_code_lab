@@ -1,4 +1,4 @@
-package org.example.lab3.inerface.segregation;
+package org.example.lab3.inerface.segregation.animal;
 
 public interface Animal {
     void eat();
