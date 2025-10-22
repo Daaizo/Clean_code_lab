@@ -5,9 +5,7 @@ import org.example.lab1.decorator.Coffee;
 import org.example.lab1.decorator.MilkDecorator;
 import org.example.lab1.decorator.SimpleCoffee;
 import org.example.lab1.decorator.SugarDecorator;
-import org.example.lab1.factory.CarFactory;
-import org.example.lab1.factory.MotorcycleFactory;
-import org.example.lab1.factory.VehicleFactory;
+import org.example.lab1.factory.*;
 import org.example.lab1.singleton.DatabaseConnection;
 import org.example.lab2.State.Order;
 import org.example.lab2.State.PendingState;
@@ -40,6 +38,7 @@ public class Main {
         demonstrateObserver();
         demonstrateStrategy();
         demonstrateState();
+        demonstrateLiskov();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -183,5 +182,26 @@ public class Main {
         order.getCurrentState();
 
         System.out.println();
+    }
+
+    private static void demonstrateLiskov() {
+        System.out.println("--- Liskov Substitution Principle ---");
+
+        Vehicle car = new Car();
+        Vehicle motorcycle = new Motorcycle();
+
+        if (car instanceof Vehicle && motorcycle instanceof Vehicle) {
+            System.out.println("Liskov Substitution Principle is working.");
+        }
+
+        processVehicle(car);
+        processVehicle(motorcycle);
+
+        System.out.println();
+    }
+
+    private static void processVehicle(Vehicle vehicle) {
+        vehicle.deliver();
+        vehicle.manufacture();
     }
 }
