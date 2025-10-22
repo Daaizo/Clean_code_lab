@@ -23,22 +23,36 @@ import org.example.lab2.observer.WindowsDisplay;
 import org.example.lab2.strategy.BubbleSort;
 import org.example.lab2.strategy.QuickSort;
 import org.example.lab2.strategy.SortContext;
+import org.example.lab3.dependency.inversion.OrderService;
+import org.example.lab3.dependency.inversion.notification.EmailNotificationChannel;
+import org.example.lab3.dependency.inversion.notification.NotificationSender;
+import org.example.lab3.dependency.inversion.notification.SMSNotificationChannel;
+import org.example.lab3.dependency.inversion.payment.CreditCardPaymentService;
+import org.example.lab3.dependency.inversion.payment.PayPalPaymentService;
+import org.example.lab3.dependency.inversion.payment.PaymentProcessor;
+import org.example.lab3.dependency.inversion.repository.DataRepository;
+import org.example.lab3.dependency.inversion.repository.MongoDBRepository;
+import org.example.lab3.dependency.inversion.repository.PostgreSQLRepository;
 
 public class Main {
     public static void main(String[] args) {
-        // lab1
+        System.out.println("--- Lab1 ---");
         demonstrateFactoryMethod();
         demonstrateSingleton();
         demonstrateDecorator();
         demonstrateBuilder();
         demonstrateAdapter();
 
-        // lab2
+        System.out.println("--- Lab2 ---");
         demonstrateCommand();
         demonstrateObserver();
         demonstrateStrategy();
         demonstrateState();
+
+
+        System.out.println("--- Lab3 ---");
         demonstrateLiskov();
+        demonstrateDependencyInversionPrinciple();
     }
 
     private static void demonstrateFactoryMethod() {
@@ -112,6 +126,8 @@ public class Main {
         if (boardAsBike instanceof SkateboardAdapter s) {
             s.doOllie();
         }
+
+        System.out.println();
     }
 
     private static void demonstrateCommand() {
@@ -203,5 +219,27 @@ public class Main {
     private static void processVehicle(Vehicle vehicle) {
         vehicle.deliver();
         vehicle.manufacture();
+    }
+
+    private static void demonstrateDependencyInversionPrinciple() {
+        System.out.println("=== DEPENDENCY INVERSION PRINCIPLE DEMO ===\n");
+
+        // Implementacja 1
+        PaymentProcessor payment1 = new CreditCardPaymentService();
+        NotificationSender notification1 = new EmailNotificationChannel();
+        DataRepository repository1 = new PostgreSQLRepository();
+
+        OrderService orderService1 = new OrderService(payment1, notification1, repository1);
+        orderService1.processOrder("ORD-001", 299.99, "customer@example.com");
+
+        System.out.println("=== ZMIANA IMPLEMENTACJI ===\n");
+
+        // Implementacja 2 (inny processor, notyfikacja i repozytorium)
+        PaymentProcessor payment2 = new PayPalPaymentService();
+        NotificationSender notification2 = new SMSNotificationChannel();
+        DataRepository repository2 = new MongoDBRepository();
+
+        OrderService orderService2 = new OrderService(payment2, notification2, repository2);
+        orderService2.processOrder("ORD-002", 199.49, "client@example.com");
     }
 }
